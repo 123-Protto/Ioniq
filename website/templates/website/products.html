@@ -1,0 +1,336 @@
+
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block title %}Products | IONIQ Batteries{% endblock %}
+
+{% block content %}
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+    <div class="container page-hero-inner">
+
+        <div class="eyebrow">
+            <span class="eyebrow-line"></span>
+            IONIQ BATTERIES
+        </div>
+
+        <h1>
+            For the flawless<br>
+            <span class="gradient-text">energy.</span>
+        </h1>
+
+        <p>
+            Ioniq manufacture and market lead-acid batteries of all types
+            in C10 and C20 along with UPS-inverters of all capacities
+            in copper and aluminum.
+        </p>
+
+        <div class="breadcrumbs">
+            <a href="{% url 'home' %}">Home</a>
+            <span>/</span>
+            <span>Products</span>
+        </div>
+
+    </div>
+
+    <div class="page-hero-shape"></div>
+</section>
+
+
+<!-- PRODUCT CATEGORIES -->
+<section class="section listing-section">
+    <div class="container">
+
+        <div class="filter-row">
+            <div>
+                <span class="eyebrow-small">OUR PRODUCT RANGE</span>
+                <h2>Explore IONIQ Batteries</h2>
+            </div>
+
+            <div class="filter-pills">
+                <a
+                    class="filter-pill {% if not active_category %}selected{% endif %}"
+                    href="{% url 'products' %}"
+                >
+                    All products
+                </a>
+
+                {% for value, label in categories %}
+                <a
+                    class="filter-pill {% if active_category == value %}selected{% endif %}"
+                    href="{% url 'products' %}?category={{ value|urlencode }}"
+                >
+                    {{ label }}
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
+
+        <!-- BROCHURE PRODUCT CATEGORIES -->
+        <div class="application-grid">
+
+            <a
+                class="application-card reveal"
+                href="{% url 'products' %}?category=automotive"
+            >
+                <span class="app-number">01</span>
+                <span class="app-icon">↗</span>
+                <h3>Automotive</h3>
+                <p>Automotive</p>
+                <span class="app-link">Explore category ↗</span>
+            </a>
+
+            <a
+                class="application-card reveal"
+                href="{% url 'products' %}?category=pasted"
+            >
+                <span class="app-number">02</span>
+                <span class="app-icon">▤</span>
+                <h3>Pasted (Flat Plates)</h3>
+                <p>Pasted (Flat Plates)</p>
+                <span class="app-link">Explore category ↗</span>
+            </a>
+
+            <a
+                class="application-card reveal"
+                href="{% url 'products' %}?category=solar"
+            >
+                <span class="app-number">03</span>
+                <span class="app-icon">☼</span>
+                <h3>Solar Batteries</h3>
+                <p>Solar Batteries</p>
+                <span class="app-link">Explore category ↗</span>
+            </a>
+
+            <a
+                class="application-card reveal"
+                href="{% url 'products' %}?category=tubular"
+            >
+                <span class="app-number">04</span>
+                <span class="app-icon">⌁</span>
+                <h3>Tubular &amp; Stationary Batteries</h3>
+                <p>Tubular &amp; Stationary Batteries</p>
+                <span class="app-link">Explore category ↗</span>
+            </a>
+
+            <a
+                class="application-card reveal"
+                href="{% url 'products' %}?category=ups"
+            >
+                <span class="app-number">05</span>
+                <span class="app-icon">ϟ</span>
+                <h3>UPS - Inverters</h3>
+                <p>UPS-inverters of all capacities in copper and aluminum</p>
+                <span class="app-link">Explore category ↗</span>
+            </a>
+
+        </div>
+
+
+        <!-- DYNAMIC PRODUCT CATALOGUE -->
+        <div class="section-heading reveal">
+            <div>
+                <div class="eyebrow">
+                    <span class="eyebrow-line"></span>
+                    PRODUCT CATALOGUE
+                </div>
+
+                <h2>
+                    Find your kind<br>
+                    of <span class="gradient-text">power.</span>
+                </h2>
+            </div>
+
+            <p>
+                Browse the available products and select a product to
+                view its details and specifications.
+            </p>
+        </div>
+
+
+        {% if products %}
+
+        <div class="product-grid listing-grid">
+
+            {% for product in products %}
+
+            <article class="product-card reveal">
+
+                <a
+                    class="product-image"
+                    href="{% url 'product_detail' product.pk %}"
+                >
+                    <!-- Standard IONIQ battery image -->
+                    <img
+                        src="{% static 'website/images/ioniq-150ah-product.png' %}"
+                        alt="IONIQ battery - {{ product.name }}"
+                        loading="lazy"
+                    >
+
+                    <span class="product-arrow">↗</span>
+                </a>
+
+                <div class="product-info">
+
+                    <span class="product-category">
+                        {{ product.get_category_display }}
+                        {% if product.capacity_ah %}
+                            · {{ product.capacity_ah }} Ah
+                        {% endif %}
+                    </span>
+
+                    <h3>
+                        <a href="{% url 'product_detail' product.pk %}">
+                            {{ product.name }}
+                        </a>
+                    </h3>
+
+                    <p>{{ product.short_description }}</p>
+
+                    <a
+                        class="text-link"
+                        href="{% url 'product_detail' product.pk %}"
+                    >
+                        View details <span>→</span>
+                    </a>
+
+                </div>
+            </article>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-state">
+            <span class="empty-icon">✳</span>
+
+            <h3>No products in this category yet</h3>
+
+            <p>
+                Our catalogue is being updated. Contact our team for
+                current availability and specifications.
+            </p>
+
+            <a class="btn btn-primary" href="{% url 'contact' %}">
+                Ask about this category ↗
+            </a>
+        </div>
+
+        {% endif %}
+
+    </div>
+</section>
+
+
+<!-- PINNACLE FEATURES -->
+<section class="quality-band">
+    <div class="container quality-grid">
+
+        <div>
+            <div class="eyebrow eyebrow-light">
+                <span class="eyebrow-line"></span>
+                PINNACLE
+            </div>
+
+            <h2>
+                Quality and<br>
+                durability.
+            </h2>
+        </div>
+
+        <div class="quality-points">
+
+            <div>
+                <span>✦</span>
+                <p>
+                    <strong>Robust construction</strong>
+                    <small>
+                        Ensures robust construction and sturdy design
+                        of battery container and cover.
+                    </small>
+                </p>
+            </div>
+
+            <div>
+                <span>✦</span>
+                <p>
+                    <strong>Vibration resistance</strong>
+                    <small>
+                        Refined PE envelopes and glass mat combination
+                        for vibration resistance.
+                    </small>
+                </p>
+            </div>
+
+            <div>
+                <span>✦</span>
+                <p>
+                    <strong>Battery efficiency</strong>
+                    <small>
+                        Low internal resistance improves battery
+                        efficiency and enhances long backup.
+                    </small>
+                </p>
+            </div>
+
+            <div>
+                <span>✦</span>
+                <p>
+                    <strong>Durability</strong>
+                    <small>
+                        Special composition with additional paste
+                        for more durability.
+                    </small>
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- CONTACT CALL TO ACTION -->
+<section class="cta-section">
+    <div class="container cta-inner reveal">
+
+        <div class="cta-pattern"></div>
+
+        <div class="cta-content">
+
+            <div class="eyebrow eyebrow-light">
+                <span class="eyebrow-line"></span>
+                CUSTOMER CARE
+            </div>
+
+            <h2>
+                Have a power need?<br>
+                Let's talk solutions.
+            </h2>
+
+            <p>
+                Ioniq offer all personal attention that our customer
+                desires. Our valued customer is always a top priority
+                to us and is the driving force behind the success.
+                We guarantee customized product service to all our customers.
+            </p>
+
+            <a class="btn btn-white" href="{% url 'contact' %}">
+                Send an enquiry <span>↗</span>
+            </a>
+
+        </div>
+
+        <div class="cta-art">
+            <div class="cta-ring ring-a"></div>
+            <div class="cta-ring ring-b"></div>
+            <span>i</span>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

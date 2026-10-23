@@ -1,1 +1,0 @@
-# IONIQ website Django application

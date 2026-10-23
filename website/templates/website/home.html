@@ -1,0 +1,558 @@
+
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block title %}IONIQ Batteries | For the Flawless Energy{% endblock %}
+
+{% block content %}
+
+<!-- HERO SECTION -->
+<section class="hero" id="top">
+    <div class="hero-orb orb-one"></div>
+    <div class="hero-orb orb-two"></div>
+
+    <div class="container hero-grid">
+        <div class="hero-copy reveal">
+            <div class="eyebrow">
+                <span class="eyebrow-line"></span>
+                FOR THE FLAWLESS ENERGY
+            </div>
+
+            <h1>
+                IONIQ Batteries<br>
+                <span class="gradient-text">A Battery With IQ.</span>
+            </h1>
+
+            <p class="hero-lead">
+                Ioniq manufacture and market lead-acid batteries of all
+                types in C10 and C20 along with UPS-inverters of all
+                capacities in copper and aluminum.
+            </p>
+
+            <div class="hero-actions">
+                <a class="btn btn-primary" href="{% url 'products' %}">
+                    Explore our range <span>↗</span>
+                </a>
+
+                <a class="btn btn-ghost" href="{% url 'contact' %}">
+                    <span class="play-icon">↗</span>
+                    Contact IONIQ
+                </a>
+            </div>
+
+            <div class="hero-proof">
+                <div class="proof-icon">✓</div>
+                <div>
+                    <strong>An ISO 9001-2015 Certified Company</strong>
+                    <small>Stringent quality checks from designing to finishing</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-visual reveal">
+            <div class="visual-glow"></div>
+
+            <div class="image-frame">
+                <img
+                    src="{% static 'website/images/ioniq-150ah-product.png' %}"
+                    alt="IONIQ 150 Ah battery"
+                    fetchpriority="high"
+                >
+
+                <div class="image-caption">
+                    <span class="caption-dot"></span>
+                    <div>
+                        <strong>IONIQ</strong>
+                        <small>FOR THE FLAWLESS ENERGY</small>
+                    </div>
+                    <span class="caption-arrow">↗</span>
+                </div>
+            </div>
+
+            <div class="floating-card floating-card-top">
+                <span class="float-icon">✦</span>
+                <div>
+                    <strong>Robust construction</strong>
+                    <small>Sturdy design of battery container and cover</small>
+                </div>
+            </div>
+
+            <div class="floating-card floating-card-bottom">
+                <span class="float-icon red">↗</span>
+                <div>
+                    <strong>Long backup</strong>
+                    <small>Low internal resistance improves battery efficiency</small>
+                </div>
+            </div>
+
+            <div class="hero-stamp">
+                <span>IONIQ</span>
+                <small>A BATTERY<br>WITH IQ</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="container hero-bottom">
+        <span>IONIQ BATTERIES</span>
+        <span class="hero-bottom-line"></span>
+        <span>FOR THE FLAWLESS ENERGY</span>
+    </div>
+</section>
+
+
+<!-- COMPANY HIGHLIGHTS -->
+<section class="stats-section">
+    <div class="container stats-grid">
+
+        <div class="stat-item reveal">
+            <strong>99.97<span>%</span></strong>
+            <p>
+                Pure lead active material<br>
+                <small>Usage of 99.97% pure lead active material</small>
+            </p>
+        </div>
+
+        <div class="stat-item reveal">
+            <strong>5</strong>
+            <p>
+                Product categories<br>
+                <small>Automotive, Pasted, Solar, Tubular and UPS</small>
+            </p>
+        </div>
+
+        <div class="stat-item reveal">
+            <strong>ISO</strong>
+            <p>
+                9001-2015 Certified Company<br>
+                <small>Quality management certification stated in brochure</small>
+            </p>
+        </div>
+
+        <div class="stat-item stat-note reveal">
+            <span class="stat-spark">✳</span>
+            <p>
+                All the measures assure the best product with the best
+                performance at all times.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- PRODUCT CATALOGUE -->
+<section class="section products-section" id="products">
+    <div class="container">
+
+        <div class="section-heading reveal">
+            <div>
+                <div class="eyebrow">
+                    <span class="eyebrow-line"></span>
+                    IONIQ BATTERIES
+                </div>
+
+                <h2>
+                    Explore our<br>
+                    <span class="gradient-text">product range.</span>
+                </h2>
+            </div>
+
+            <p>
+                Ioniq manufacture and market lead-acid batteries of all
+                types in C10 and C20 along with UPS-inverters of all
+                capacities in copper and aluminum.
+            </p>
+        </div>
+
+        {% if products %}
+
+        <div class="product-grid">
+            {% for product in products %}
+
+            <article class="product-card reveal">
+                <a
+                    class="product-image"
+                    href="{% url 'product_detail' product.pk %}"
+                >
+                    <!-- Use the same IONIQ battery photo everywhere -->
+                    <img
+                        src="{% static 'website/images/ioniq-150ah-product.png' %}"
+                        alt="IONIQ 150 Ah battery - {{ product.name }}"
+                        loading="lazy"
+                    >
+
+                    <span class="product-arrow">↗</span>
+                </a>
+
+                <div class="product-info">
+                    <span class="product-category">
+                        {{ product.get_category_display }}
+                    </span>
+
+                    <h3>
+                        <a href="{% url 'product_detail' product.pk %}">
+                            {{ product.name }}
+                        </a>
+                    </h3>
+
+                    <p>{{ product.short_description }}</p>
+
+                    <a
+                        class="text-link"
+                        href="{% url 'product_detail' product.pk %}"
+                    >
+                        View details <span>→</span>
+                    </a>
+                </div>
+            </article>
+
+            {% endfor %}
+        </div>
+
+        {% else %}
+
+        <div class="empty-products reveal">
+            <div class="empty-icon">✳</div>
+
+            <h3>Explore the IONIQ battery range.</h3>
+
+            <p>
+                Explore our battery categories or contact us for product
+                information. Products can be added through the Django
+                admin panel.
+            </p>
+
+            <a class="btn btn-primary" href="{% url 'products' %}">
+                Explore product categories <span>↗</span>
+            </a>
+        </div>
+
+        {% endif %}
+
+        <div class="center-action">
+            <a class="btn btn-outline" href="{% url 'products' %}">
+                View all products <span>↗</span>
+            </a>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- PINNACLE: IONIQ PRODUCT FEATURES -->
+<section class="feature-section">
+    <div class="container feature-grid">
+
+        <div class="feature-visual reveal">
+            <img
+                src="{% static 'website/images/ioniq-150ah-product.png' %}"
+                alt="IONIQ battery product"
+                loading="lazy"
+            >
+
+            <div class="feature-badge">
+                <span>✦</span>
+                <div>
+                    <strong>IONIQ PINNACLE</strong>
+                    <small>Quality at every step</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-copy reveal">
+            <div class="eyebrow">
+                <span class="eyebrow-line"></span>
+                PINNACLE
+            </div>
+
+            <h2>
+                Robust design.<br>
+                <span class="gradient-text">Long backup.</span>
+            </h2>
+
+            <p class="body-large">
+                IONIQ batteries are designed with a focus on sturdy
+                construction, battery efficiency and durability.
+            </p>
+
+            <div class="feature-list">
+
+                <div>
+                    <span class="check-circle">✓</span>
+                    <p>
+                        <strong>Robust construction</strong>
+                        <small>
+                            Ensures robust construction and sturdy design
+                            of battery container and cover.
+                        </small>
+                    </p>
+                </div>
+
+                <div>
+                    <span class="check-circle">✓</span>
+                    <p>
+                        <strong>Vibration resistance</strong>
+                        <small>
+                            Refined PE envelopes and glass mat combination
+                            for vibration resistance.
+                        </small>
+                    </p>
+                </div>
+
+                <div>
+                    <span class="check-circle">✓</span>
+                    <p>
+                        <strong>Battery efficiency</strong>
+                        <small>
+                            Low internal resistance improves battery
+                            efficiency and enhances long backup.
+                        </small>
+                    </p>
+                </div>
+
+                <div>
+                    <span class="check-circle">✓</span>
+                    <p>
+                        <strong>Durability</strong>
+                        <small>
+                            Special composition with additional paste
+                            for more durability.
+                        </small>
+                    </p>
+                </div>
+
+            </div>
+
+            <a class="text-link" href="{% url 'about' %}">
+                Discover IONIQ <span>→</span>
+            </a>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- TEAM AND CUSTOMER SERVICE -->
+<section class="section">
+    <div class="container">
+
+        <div class="section-heading reveal">
+            <div>
+                <div class="eyebrow">
+                    <span class="eyebrow-line"></span>
+                    TEAM
+                </div>
+
+                <h2>
+                    United by trust.<br>
+                    <span class="gradient-text">Growing together.</span>
+                </h2>
+            </div>
+        </div>
+
+        <div class="about-copy reveal">
+            <p class="body-large">
+                Team Ioniq is a united bunch of professionals with rich
+                experience and competence in power industry. The spirit
+                of this team is to stay united and pave way to success
+                in energy mission and target set by the organization.
+            </p>
+
+            <p>
+                We value in laying foundation of trust and believe in
+                growing together. At Ioniq every product undergoes
+                stringent quality checks, right from designing to
+                finishing. All the measures assure the best product
+                with the best performance at all times.
+            </p>
+        </div>
+
+        <div class="about-values reveal">
+
+            <div>
+                <span>01</span>
+                <strong>TEAM</strong>
+                <small>
+                    United professionals with experience and competence
+                    in power industry.
+                </small>
+            </div>
+
+            <div>
+                <span>02</span>
+                <strong>PATRON</strong>
+                <small>
+                    Ioniq offer all personal attention that our
+                    customer desires.
+                </small>
+            </div>
+
+            <div>
+                <span>03</span>
+                <strong>QUALITY</strong>
+                <small>
+                    Every product undergoes stringent quality checks,
+                    right from designing to finishing.
+                </small>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- APPLICATION CATEGORIES -->
+<section class="applications-section">
+    <div class="container">
+
+        <div class="section-heading section-heading-light reveal">
+            <div>
+                <div class="eyebrow">
+                    <span class="eyebrow-line"></span>
+                    OUR PRODUCT CATEGORIES
+                </div>
+
+                <h2>
+                    IONIQ batteries<br>
+                    <span class="gradient-text">for varied applications.</span>
+                </h2>
+            </div>
+
+            <p>
+                Explore the battery categories listed in the IONIQ
+                brochure.
+            </p>
+        </div>
+
+        <div class="application-grid">
+
+            <a
+                class="application-card reveal"
+                href="{% url 'products' %}?category=automotive"
+            >
+                <span class="app-number">01</span>
+                <span class="app-icon">↗</span>
+                <h3>Automotive</h3>
+                <p>Automotive Batteries</p>
+                <span class="app-link">Explore category ↗</span>
+            </a>
+
+            <a
+                class="application-card reveal"
+                href="{% url 'products' %}?category=pasted"
+            >
+                <span class="app-number">02</span>
+                <span class="app-icon">▤</span>
+                <h3>Pasted (Flat Plates)</h3>
+                <p>Pasted (Flat Plates)</p>
+                <span class="app-link">Explore category ↗</span>
+            </a>
+
+            <a
+                class="application-card reveal"
+                href="{% url 'products' %}?category=solar"
+            >
+                <span class="app-number">03</span>
+                <span class="app-icon">☼</span>
+                <h3>Solar Batteries</h3>
+                <p>Solar Batteries</p>
+                <span class="app-link">Explore category ↗</span>
+            </a>
+
+            <a
+                class="application-card reveal"
+                href="{% url 'products' %}?category=tubular"
+            >
+                <span class="app-number">04</span>
+                <span class="app-icon">⌁</span>
+                <h3>Tubular &amp; Stationary Batteries</h3>
+                <p>Tubular &amp; Stationary Batteries</p>
+                <span class="app-link">Explore category ↗</span>
+            </a>
+
+            <a
+                class="application-card reveal"
+                href="{% url 'products' %}?category=ups"
+            >
+                <span class="app-number">05</span>
+                <span class="app-icon">ϟ</span>
+                <h3>UPS - Inverters</h3>
+                <p>
+                    UPS-inverters of all capacities in copper and aluminum.
+                </p>
+                <span class="app-link">Explore category ↗</span>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- COMPANY SYNOPSIS -->
+<section class="section">
+    <div class="container about-copy reveal">
+
+        <div class="eyebrow">
+            <span class="eyebrow-line"></span>
+            SYNOPSIS
+        </div>
+
+        <h2>
+            IONIQ Batteries<br>
+            <span class="gradient-text">For the flawless energy.</span>
+        </h2>
+
+        <p class="body-large">
+            Ioniq manufacture and market lead-acid batteries of all
+            types in C10 and C20 along with UPS-inverters of all
+            capacities in copper and aluminum.
+        </p>
+
+        <a class="text-link" href="{% url 'about' %}">
+            Learn more about IONIQ <span>→</span>
+        </a>
+
+    </div>
+</section>
+
+
+<!-- CONTACT CALL TO ACTION -->
+<section class="cta-section">
+    <div class="container cta-inner reveal">
+
+        <div class="cta-pattern"></div>
+
+        <div class="cta-content">
+            <div class="eyebrow eyebrow-light">
+                <span class="eyebrow-line"></span>
+                CONTACT IONIQ
+            </div>
+
+            <h2>
+                Looking for a battery?<br>
+                Contact our team.
+            </h2>
+
+            <p>
+                Ioniq offer all personal attention that our customer
+                desires. Our valued customer is always a top priority
+                to us and is the driving force behind the success.
+                We guarantee customized product service to all our customers.
+            </p>
+
+            <a class="btn btn-white" href="{% url 'contact' %}">
+                Send an enquiry <span>↗</span>
+            </a>
+        </div>
+
+        <div class="cta-art">
+            <div class="cta-ring ring-a"></div>
+            <div class="cta-ring ring-b"></div>
+            <span>i</span>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

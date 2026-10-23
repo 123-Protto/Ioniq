@@ -1,0 +1,2 @@
+Django migrations are generated with: python manage.py makemigrations website
+Then run: python manage.py migrate

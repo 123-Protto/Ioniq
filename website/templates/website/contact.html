@@ -1,0 +1,351 @@
+
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block title %}Contact | IONIQ Batteries{% endblock %}
+
+{% block content %}
+
+<!-- CONTACT HERO -->
+<section class="page-hero contact-page-hero">
+    <div class="container page-hero-inner">
+
+        <div class="eyebrow">
+            <span class="eyebrow-line"></span>
+            GET IN TOUCH
+        </div>
+
+        <h1>
+            Let's talk about<br>
+            <span class="gradient-text">your power needs.</span>
+        </h1>
+
+        <p>
+            Ioniq offer all personal attention that our customer desires.
+            Our valued customer is always a top priority to us and is
+            the driving force behind the success. We guarantee customized
+            product service to all our customers.
+        </p>
+
+        <div class="breadcrumbs">
+            <a href="{% url 'home' %}">Home</a>
+            <span>/</span>
+            <span>Contact</span>
+        </div>
+
+    </div>
+
+    <div class="page-hero-shape"></div>
+</section>
+
+
+<!-- CONTACT DETAILS AND ENQUIRY FORM -->
+<section class="section contact-section">
+    <div class="container contact-grid">
+
+        <!-- COMPANY CONTACT DETAILS -->
+        <div class="contact-details reveal">
+
+            <div class="eyebrow">
+                <span class="eyebrow-line"></span>
+                CONTACT DETAILS
+            </div>
+
+            <h2>
+                We're here<br>
+                <span class="gradient-text">to help.</span>
+            </h2>
+
+            <p>
+                For product information and enquiries about IONIQ batteries,
+                please contact our team.
+            </p>
+
+            <!-- FACTORY ADDRESS -->
+            <div class="contact-detail">
+                <span class="contact-icon">⌖</span>
+
+                <div>
+                    <small>FACTORY ADDRESS</small>
+
+                    <p>
+                        224, A Hebbal Industrial Area,<br>
+                        Belavadi P.O. Mysore - 18 (India)
+                    </p>
+                </div>
+            </div>
+
+            <!-- EMAIL -->
+            <div class="contact-detail">
+                <span class="contact-icon">✉</span>
+
+                <div>
+                    <small>EMAIL</small>
+
+                    <a href="mailto:ioniqbatteries@gmail.com">
+                        ioniqbatteries@gmail.com
+                    </a>
+                </div>
+            </div>
+
+            <!-- CUSTOMER CARE -->
+            <div class="contact-detail">
+                <span class="contact-icon">☎</span>
+
+                <div>
+                    <small>CUSTOMER CARE NO</small>
+
+                    <a href="tel:+918848648822">
+                        +91 8848648822
+                    </a>
+                </div>
+            </div>
+
+            <!-- COMPANY WEBSITE -->
+            <div class="contact-detail">
+                <span class="contact-icon">↗</span>
+
+                <div>
+                    <small>WEBSITE</small>
+
+                    <a
+                        href="https://www.ioniqbatteries.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        www.ioniqbatteries.com
+                    </a>
+                </div>
+            </div>
+
+            <div class="contact-hours">
+                <span class="status-dot"></span>
+                Enquiries welcome — contact IONIQ for product information.
+            </div>
+
+            <div class="contact-detail">
+                <span class="contact-icon">✦</span>
+
+                <div>
+                    <small>COMPANY CERTIFICATION</small>
+
+                    <p>An ISO 9001-2015 Certified Company</p>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- ENQUIRY FORM -->
+        <div class="contact-form-card reveal">
+
+            <div class="form-heading">
+                <span class="form-kicker">ENQUIRY FORM</span>
+
+                <h3>How can we help?</h3>
+
+                <p>Fields marked * are required.</p>
+            </div>
+
+            <form method="post" class="enquiry-form">
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    <div class="form-errors">
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <!-- NAME AND PHONE -->
+                <div class="form-row">
+
+                    <div class="field">
+                        <label for="id_name">Full name *</label>
+
+                        {{ form.name }}
+
+                        {% if form.name.errors %}
+                            <div class="form-errors">
+                                {{ form.name.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="field">
+                        <label for="id_phone">Phone / WhatsApp *</label>
+
+                        {{ form.phone }}
+
+                        {% if form.phone.errors %}
+                            <div class="form-errors">
+                                {{ form.phone.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+
+                <!-- EMAIL AND LOCATION -->
+                <div class="form-row">
+
+                    <div class="field">
+                        <label for="id_email">Email address</label>
+
+                        {{ form.email }}
+
+                        {% if form.email.errors %}
+                            <div class="form-errors">
+                                {{ form.email.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="field">
+                        <label for="id_location">Your location</label>
+
+                        {{ form.location }}
+
+                        {% if form.location.errors %}
+                            <div class="form-errors">
+                                {{ form.location.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+
+                <!-- PRODUCT INTEREST -->
+                <div class="field">
+                    <label for="id_product_interest">
+                        Product interest
+                    </label>
+
+                    {{ form.product_interest }}
+
+                    {% if form.product_interest.errors %}
+                        <div class="form-errors">
+                            {{ form.product_interest.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+
+
+                <!-- MESSAGE -->
+                <div class="field">
+                    <label for="id_message">Your message *</label>
+
+                    {{ form.message }}
+
+                    {% if form.message.errors %}
+                        <div class="form-errors">
+                            {{ form.message.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+
+
+                <!-- SUBMIT -->
+                <button type="submit" class="btn btn-primary form-submit">
+                    Send enquiry <span>↗</span>
+                </button>
+
+                <p class="form-privacy">
+                    Your details are used to respond to this enquiry.
+                </p>
+
+            </form>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- PRODUCT CATEGORIES -->
+<section class="applications-section">
+    <div class="container">
+
+        <div class="section-heading section-heading-light reveal">
+            <div>
+                <div class="eyebrow">
+                    <span class="eyebrow-line"></span>
+                    OUR PRODUCT RANGE
+                </div>
+
+                <h2>
+                    IONIQ batteries<br>
+                    <span class="gradient-text">for your requirements.</span>
+                </h2>
+            </div>
+
+            <p>
+                Ioniq manufacture and market lead-acid batteries of all
+                types in C10 and C20 along with UPS-inverters of all
+                capacities in copper and aluminum.
+            </p>
+        </div>
+
+        <div class="application-grid">
+
+            <a
+                class="application-card reveal"
+                href="{% url 'products' %}?category=automotive"
+            >
+                <span class="app-number">01</span>
+                <span class="app-icon">↗</span>
+                <h3>Automotive</h3>
+                <p>Automotive batteries</p>
+                <span class="app-link">Explore category ↗</span>
+            </a>
+
+            <a
+                class="application-card reveal"
+                href="{% url 'products' %}?category=pasted"
+            >
+                <span class="app-number">02</span>
+                <span class="app-icon">▤</span>
+                <h3>Pasted (Flat Plates)</h3>
+                <p>Pasted (Flat Plates)</p>
+                <span class="app-link">Explore category ↗</span>
+            </a>
+
+            <a
+                class="application-card reveal"
+                href="{% url 'products' %}?category=solar"
+            >
+                <span class="app-number">03</span>
+                <span class="app-icon">☼</span>
+                <h3>Solar Batteries</h3>
+                <p>Solar Batteries</p>
+                <span class="app-link">Explore category ↗</span>
+            </a>
+
+            <a
+                class="application-card reveal"
+                href="{% url 'products' %}?category=tubular"
+            >
+                <span class="app-number">04</span>
+                <span class="app-icon">⌁</span>
+                <h3>Tubular &amp; Stationary Batteries</h3>
+                <p>Tubular &amp; Stationary Batteries</p>
+                <span class="app-link">Explore category ↗</span>
+            </a>
+
+            <a
+                class="application-card reveal"
+                href="{% url 'products' %}?category=ups"
+            >
+                <span class="app-number">05</span>
+                <span class="app-icon">ϟ</span>
+                <h3>UPS - Inverters</h3>
+                <p>UPS-inverters of all capacities in copper and aluminum</p>
+                <span class="app-link">Explore category ↗</span>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}
